@@ -14,14 +14,6 @@ import 'react-dates/lib/css/_datepicker.css';
 // Configure redux store
 const store = configureStore();
 
-store.dispatch(addExpense({ description: 'Water bill', amount: 4500 }));
-store.dispatch(addExpense({ description: 'Rent', amount: 109500 }));
-store.dispatch(addExpense({ description: 'Gas bill', amount: 1000 }));
-
-const state = store.getState();
-const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-console.log(visibleExpenses);
-
 // jsx to be rendered to the browser
 const jsx = (
     <Provider store={ store }>
