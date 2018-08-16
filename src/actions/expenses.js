@@ -11,6 +11,8 @@ import database from '../firebase/firebase';
 // component dispatches function
 // function runs (has the ability to dispatch other actions and do whatever it wants)
 
+/* Add Expense Actions */
+
 // ADD_EXPENSE 
 export const addExpense = (expense) => ({
     type: 'ADD_EXPENSE',
@@ -46,11 +48,27 @@ export const startAddExpense = (expenseData = {}) => {
     };
 };
 
+
+
+/* Remove Expense Actions */
+
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
     type: 'REMOVE_EXPENSE',
     id
 });
+
+export const startRemoveExpense = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).remove().then(() => {
+            dispatch(removeExpense({ id }));
+        });
+    }
+};
+
+
+
+/* Edit Expense Actions */
 
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
@@ -58,6 +76,10 @@ export const editExpense = (id, updates) => ({
     id,
     updates
 });
+
+
+
+/* Set Expenses Actions */
 
 // SET_EXPENSES
 export const setExpenses = (expenses) => ({
