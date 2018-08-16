@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { addExpense } from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
 import { setTextFilter } from './actions/filters'
 import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
@@ -22,5 +22,10 @@ const jsx = (
     </Provider>
 );
 
-// Render app to browser
-ReactDOM.render(jsx, document.querySelector('#app'));
+// Render loading message while waiting for database fetch
+ReactDOM.render(<p>Loading...</p>, document.querySelector('#app'));
+
+store.dispatch(startSetExpenses()).then(() => {
+    // Render app to browser with data from firebase
+    ReactDOM.render(jsx, document.querySelector('#app'));
+})
