@@ -5,14 +5,14 @@ import { AddExpensePage } from '../../components/AddExpensePage';
 import expenses from '../fixtures/expenses';
 
 // Setup code to be run before each test
-let addExpense, history, wrapper;
+let startAddExpense, history, wrapper;
 beforeEach(() => {
     // Setup function spies
-    addExpense = jest.fn();
+    startAddExpense = jest.fn();
     history = { push: jest.fn() };
 
     // Shallow render component and store resulting render
-    wrapper = shallow(<AddExpensePage addExpense={ addExpense } history={ history } />);
+    wrapper = shallow(<AddExpensePage startAddExpense={ startAddExpense } history={ history } />);
 });
 
 
@@ -30,5 +30,5 @@ test('should handle onSubmit', () => {
 
     // Check for correct call from history and onSubmit functions
     expect(history.push).toHaveBeenCalledWith('/');
-    expect(addExpense).toHaveBeenLastCalledWith(expenses[0]);
+    expect(startAddExpense).toHaveBeenLastCalledWith(expenses[0]);
 });
